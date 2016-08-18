@@ -46,7 +46,7 @@ if [[ $process == "help" ]]; then
 fi
 if [[ -z $group ]]; then group="notagroup"; fi
 arrayname=arraygroup$process[@];
-while [[ -z `echo ${!arrayname} | grep $group` ]]; do echo "Please type one of ${!arrayname}; read group; done
+while [[ -z `echo ${!arrayname} | grep $group` ]]; do echo "Please type one of ${!arrayname}"; read group; done
 if [[ $specify1 == "" ]]; then
   arrayname=arrayspecify$process$group[@];
   echo "Now fill out all of ${!arrayname} one at a time in this order:";
