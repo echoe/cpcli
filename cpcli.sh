@@ -22,7 +22,7 @@ arrayspecifyemaildeleteaccount=(cpuser email@domain.com);
 arrayspecifyemailchgmx=(domain mxtype);
 
 #This is what controls our help, it's the meat of the program and will list the arrays above as needed.
-#this line may be broken but this is what I'm working on
+if [[ -z $process ]]; then process="notaprocess"; fi
 while [[ -z `echo ${arrayprocess[*]} | grep $process` ]]; do echo "Please type one of ${arrayprocess[*]}"; read process; done
 if [[ $process == "help" ]]; then
   if [[ $group == "" ]]; then
@@ -32,6 +32,8 @@ if [[ $process == "help" ]]; then
     echo "If you have any questions or concerns, please submit a patch request or open a bug!"
     exit 1;
   fi
+  if [[ -z $group ]]; then group="notagroup"; fi
+  while [[ -z `echo ${arraygroup$process[*]} | grep $group` ]]; do echo "Please type one of ${arraygroup$process[*]}"; read group; done
   if [[ -z $specify1 ]]; then
     arrayname=arraygroup$group[@];
     echo "The options for $group are ${!arrayname}";
@@ -42,10 +44,9 @@ if [[ $process == "help" ]]; then
     echo " ./cpcli.sh $group $specify1 ${!arrayname} ";
   fi
 fi
-if [[ $group == "" ]]; then
-  arrayname=arraygroup$process[@];
-  echo "Please type one of ${!arrayname}"; read group;
-fi
+if [[ -z $group ]]; then group="notagroup"; fi
+arrayname=arraygroup$process[@];
+while [[ -z `echo ${!arrayname} | grep $group` ]]; do echo "Please type one of ${!arrayname}; read group; done
 if [[ $specify1 == "" ]]; then
   arrayname=arrayspecify$process$group[@];
   echo "Now fill out all of ${!arrayname} one at a time in this order:";
