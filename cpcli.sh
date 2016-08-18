@@ -23,7 +23,7 @@ arrayspecifyemailchgmx=(domain mxtype);
 
 #This is what controls our help, it's the meat of the program and will list the arrays above as needed.
 #this line may be broken but this is what I'm working on
-while [[ -z `${arrayprocess[*]} | grep $process` ]]; echo "Please type one of ${arrayprocess[*]}"; read process; done
+while [[ -z `${arrayprocess[*]} | grep $process` ]]; do echo "Please type one of ${arrayprocess[*]}"; read process; done
 if [[ $process == "help" ]]; then
   if [[ $group == "" ]]; then
     echo "A shell script to automate useful WHMAPI commands.";
