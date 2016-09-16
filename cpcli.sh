@@ -108,7 +108,7 @@ if [[ $process == "email" ]]; then
   fi
   if [[ $group == "chgmx" ]]; then
     tempuser=`/scripts/whoowns $specify1`;
-    exchanger=`grep MX /var/named/$specify1.db | awk '{print $5}'`;
+    exchanger=`uapi --user=$tempuser Email list_mxs domain=$specify1 |grep domain | sed 's/ //g' | cut -d: -f2 | head -n1`;
     uapi --user=$tempuser Email change_mx domain=$specify1 alwaysaccept=$specify2 exchanger=$exchanger oldexchanger=$exchanger;
   fi
   if [[ $group == "chgpasswd" ]]; then
